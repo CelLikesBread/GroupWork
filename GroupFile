@@ -24,7 +24,7 @@ rename "pSphere1" "Test_Orb"
 move -r 0 0 5 ;
 
 //Scale Sphere
-scale -r 0 2 0 ;
+scale -r 1 5 1 ;
 
 //Zak's Code
 //Creates a tall Cone
