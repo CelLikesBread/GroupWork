@@ -21,14 +21,10 @@ select -r pSphere1;
 rename "pSphere1" "Test_Orb"
 
 //Move Sphere
-setAttr "Test_Orb.translateX" 0;
-setAttr "Test_Orb.translateY" 0;
-setAttr "Test_Orb.translateZ" 0;
+move -r 0 0 5 ;
 
 //Scale Sphere
-setAttr "Test_Orb.scaleX" 1;
-setAttr "Test_Orb.scaleY" 1;
-setAttr "Test_Orb.scaleZ" 1;
+scale -r 0 2 0 ;
 
 //Zak's Code
 //Creates a tall Cone
