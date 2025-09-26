@@ -8,3 +8,24 @@ rotate 45 45 45;
 select $orb.f[200];
 move -r 1 3 3;
 rename $orb[0] "TheOrb";
+
+
+//Callum's Code
+// Create Sphere 
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+
+//Select Sphere
+select -r pSphere1; 
+
+//Rename Sphere
+rename "pSphere1" "Test_Orb"
+
+//Move Sphere
+setAttr "Test_Orb.translateX" 0;
+setAttr "Test_Orb.translateY" 0;
+setAttr "Test_Orb.translateZ" 0;
+
+//Scale Sphere
+setAttr "Test_Orb.scaleX" 1;
+setAttr "Test_Orb.scaleY" 1;
+setAttr "Test_Orb.scaleZ" 1;
