@@ -92,3 +92,24 @@ select $cylinder;
 move 2.5 1.5 4;
 rename $cylinder[0] "Trunk";
 //Becomes a group of trees!
+
+//Selection Transform Function
+// Get everything selected
+string $sel[] = `ls -sl`;
+// Create out loop
+for ($each in $sel) {
+    select $each;
+  
+    //Zak's Contribution
+    move -relative 0 5.5 0;
+    rename $each "TallCone";
+    move -relative 0 1 0;
+    
+    //Cel's Contribution
+    rotate 45 45 45;
+    
+    //Callum's Contribution
+    scale 1 5 1;
+    }
+
+
