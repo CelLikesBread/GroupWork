@@ -1,70 +1,35 @@
+//Cels Code
+global string $objects[];
 
-//Pete's code
-// Basic UI Example: My Amazing UI
-
-// OPTIONAL: Delete any existing window with this name
-if (`window -exists myAmazingUI`) {
-    deleteUI -window myAmazingUI;
+//procedure - make sphere
+global proc prepOrb() {
+    global string $objects[];
+    $objects = `polySphere -name "orb"`;
 }
 
-// Define a procedure for "Do a thing"
-global proc myDoAThing() {
-    // add your code here
-    print("Pete is by far my favourite lecturer.\n");
-}
-
-// Build the window
-window -title "My Amazing UI" -widthHeight 300 100 myAmazingUI;
-columnLayout -adjustableColumn true -rowSpacing 10;
-    button -label "Do a thing" -command "myDoAThing()";
-    button -label "Do another thing" -command "print(\erergf"Doing another thing!\\n\")";
-setParent ..;
-
-// Show the window
-showWindow myAmazingUI;
-
-
-----------
-
-
-// Basic UI Example: My Amazing UI
-
-global string $happyCube[]; // declare global variable
-
-// Delete any existing window with this name
-if (`window -exists myAmazingUI`) {
-    deleteUI -window myAmazingUI;
-}
-
-// Define a procedure for "createCube"
-global proc createCube() {
-    // createCube
-    global string $happyCube[]; // Access the global variable
-    $happyCube = `polyCube -name "happyLittleCube"`;
-}
-
-// Define a procedure for "moveCubes"
-global proc moveCubes() {
-    global string $happyCube[]; // Access the global variable
-    // move Cubes
+// procedure - the orb
+global proc theOrb() {
+    global string $objects[];
     string $sel[] = `ls -sl`;
-
+    
     for ($each in $sel){
-        if ($each == $happyCube[0]) {
-            move -r 0 2 0 $each;
+        int $inList = stringArrayContains($each, $objects);
+        if ($inList == 1) {
+            move -r 2 1 3;
+            scale 1 2 1;
+            rotate -r 45 45 45;
         }
-        else {
-            move -r 0 -2 0 $each;
-        }
+        $inList = 0;
+        select -d $each;
     }
 }
 
-// Build the window
-window -title "My Amazing UI" -widthHeight 200 100 myAmazingUI;
+//make window
+window -title "The ORB" -widthHeight 200 100 theOrb;
 columnLayout -adjustableColumn true -rowSpacing 10;
-    button -label "Create Happy Cube" -command "createCube()";
-    button -label "Move Cubes" -command "moveCubes()";
+    button -label "Prepare Orb" -command "prepOrb()";
+    button -label "The Orb Awaits" -command "theOrb()";
 setParent ..;
 
-// Show the window
-showWindow myAmazingUI;
+showWindow theOrb;
+
