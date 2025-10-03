@@ -77,3 +77,35 @@ setParent ..;
 
 // Show the window
 showWindow doesEverythingUI;
+
+
+//Callum's Code
+//Global variable
+global string $Donut[];
+
+//Defined procedure for Thing
+global proc Thing() {
+    // create Torus
+    global string $Donut[];
+    $Donut = `polyTorus -name "Kyojuro Rengoku"`;
+}
+
+//Define procedure for Akaza Kebab Master
+global proc Akaza() {
+    global string $Donut[];
+    rotate 0 0 90;
+    select -tgl Kyojuro_Rengoku.f[96:99];
+    select -tgl Kyojuro_Rengoku.f[80:81];
+    move -r -0.5 -2 0 ;
+   
+}
+
+// Build the window
+window -title "UI" -widthHeight 200 300 UI;
+columnLayout -adjustableColumn true -rowSpacing 10;
+    button -label "Reference" -command "Thing()";
+    button -label "The reference continues" -command "Akaza";
+setParent ..;
+
+// Show the window
+showWindow UI;
