@@ -33,3 +33,47 @@ setParent ..;
 
 showWindow theOrb;
 
+//Zak's Code
+
+global string $PlaneSurface[];
+// Delete any existing window with this name
+if (`window -exists doesEverythingUI`) {
+    deleteUI -window doesEverythingUI;
+}
+
+// Define a procedure
+global proc CreateSign() {
+    // createPlane
+    global string $PlaneSurface[]; // Access the global variable
+    $PlaneSurface = `polyPlane -w 4 -h 2 -name "BigSign"`;
+}
+
+// Define a procedure
+global proc LiftSign() {
+    global int $Counter = 0; //Abandoned Code
+    global string $PlaneSurface[]; // Access the global variable
+    // LiftSigns
+    string $sel[] = `ls -sl`;
+
+    for ($each in $sel){ 
+        if ($each == $PlaneSurface[0]) {
+            move -r 0 4 0 $each;
+            rotate 90 0 0 $each;
+        }
+        else {
+            move -r 0 1 0 $each;
+            rotate 90 0 0 $each;
+        }
+        $Counter = $Counter + 1;
+    }
+}
+
+// Build the window
+window -title "Do Everything!" -widthHeight 200 100 doesEverythingUI;
+columnLayout -adjustableColumn true -rowSpacing 10;
+    button -label "Create a Sign" -command "CreateSign()";
+    button -label "Put Signs up" -command "LiftSign()";
+setParent ..;
+
+// Show the window
+showWindow doesEverythingUI;
