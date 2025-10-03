@@ -1,1 +1,116 @@
+//Cels Code
+global string $objects[];
 
+//procedure - make sphere
+global proc prepOrb() {
+    global string $objects[];
+    $objects = `polySphere -name "orb"`;
+}
+
+// procedure - the orb
+global proc theOrb() {
+    global string $objects[];
+    string $sel[] = `ls -sl`;
+    
+    for ($each in $sel){
+        int $inList = stringArrayContains($each, $objects);
+        if ($inList == 1) {
+            move -r 2 1 3;
+            scale 1 2 1;
+            rotate -r 45 45 45;
+        }
+        $inList = 0;
+        select -d $each;
+    }
+}
+
+//Zak's Code
+
+global string $PlaneSurface[];
+// Delete any existing window with this name
+if (`window -exists doesEverythingUI`) {
+    deleteUI -window doesEverythingUI;
+}
+
+// Define a procedure
+global proc CreateSign() {
+    // createPlane
+    global string $PlaneSurface[]; // Access the global variable
+    $PlaneSurface = `polyPlane -w 4 -h 2 -name "BigSign"`;
+}
+
+// Define a procedure
+global proc LiftSign() {
+    global int $Counter = 0; //Abandoned Code
+    global string $PlaneSurface[]; // Access the global variable
+    // LiftSigns
+    string $sel[] = `ls -sl`;
+
+    for ($each in $sel){ 
+        if ($each == $PlaneSurface[0]) {
+            move -r 0 4 0 $each;
+            rotate 90 0 0 $each;
+        }
+        else {
+            move -r 0 1 0 $each;
+            rotate 90 0 0 $each;
+        }
+        $Counter = $Counter + 1;
+    }
+}
+
+
+
+
+//Callum's Code
+//Global variable
+global string $Donut[];
+
+//Defined procedure for Thing
+global proc Thing() {
+    // create Torus
+    global string $Donut[];
+    $Donut = `polyTorus -name "Kyojuro Rengoku"`;
+}
+
+//Define procedure for Akaza Kebab Master
+global proc Akaza() {
+    global string $Donut[];
+    rotate 0 0 90;
+    select -tgl Kyojuro_Rengoku.f[96:99];
+    select -tgl Kyojuro_Rengoku.f[80:81];
+    move -r -0.5 -2 0 ;
+   
+}
+
+
+//Amaans Code
+global proc createCube() {
+    // Creates a cube
+    global string $happyCube[]; 
+    $happyCube = `polyCube -name "happyLittleCube"`;
+
+string $shader = `shadingNode -asShader lambert -name "redLambert"`;
+setAttr ($shader + ".color") -type double3 1 0 0;
+
+string $shadingGroup = `sets -renderable true -noSurfaceShader true -empty -name ($shader + "SG")`;
+connectAttr -f ($shader + ".outColor") ($shadingGroup + ".surfaceShader");
+
+select $happyCube[0];
+sets -e -forceElement $shadingGroup $happyCube[0];
+}
+
+// Build the window
+window -title "My Amazing UI" -widthHeight 200 100 myAmazingUI;
+columnLayout -adjustableColumn true -rowSpacing 10;
+    button -label "Make Red Cube" -command "createCube()";
+    button -label "Reference" -command "Thing()";
+    button -label "The reference continues" -command "Akaza";
+    button -label "Create a Sign" -command "CreateSign()";
+    button -label "Put Signs up" -command "LiftSign()";
+    button -label "Prepare Orb" -command "prepOrb()";
+    button -label "The Orb Awaits" -command "theOrb()";
+setParent ..;
+
+// Show the window
+showWindow myAmazingUI;
