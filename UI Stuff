@@ -109,3 +109,28 @@ setParent ..;
 
 // Show the window
 showWindow UI;
+
+//Amaans Code
+global proc createCube() {
+    // Creates a cube
+    global string $happyCube[]; 
+    $happyCube = `polyCube -name "happyLittleCube"`;
+
+string $shader = `shadingNode -asShader lambert -name "redLambert"`;
+setAttr ($shader + ".color") -type double3 1 0 0;
+
+string $shadingGroup = `sets -renderable true -noSurfaceShader true -empty -name ($shader + "SG")`;
+connectAttr -f ($shader + ".outColor") ($shadingGroup + ".surfaceShader");
+
+select $happyCube[0];
+sets -e -forceElement $shadingGroup $happyCube[0];
+}
+
+// Build the window
+window -title "My Amazing UI" -widthHeight 200 100 myAmazingUI;
+columnLayout -adjustableColumn true -rowSpacing 10;
+    button -label "Make Red Cube" -command "createCube()";
+setParent ..;
+
+// Show the window
+showWindow myAmazingUI;
