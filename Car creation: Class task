@@ -7,8 +7,8 @@ move 0 2 0;
 //Wheels
 polyCylinder;
 select -r pCylinder1 ;
-rotate 90 0 0;
-scale 3 3 3;
+rotate 90 90 0;
+scale 0.8 1 0.8;
 duplicate -rr;
 duplicate -rr;
 duplicate -rr;
