@@ -1,6 +1,7 @@
 //make body
 string $body[] = `polyCube -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1`;
 select $body;
+rename $body[0] "Body";
 scale 4 3 6;
 move 0 2 0;
 
@@ -12,14 +13,30 @@ scale 0.8 0.5 0.8;
 duplicate -rr;
 duplicate -rr;
 duplicate -rr;
+
 select -r pCylinder1 ;
+rename "pCylinder1" "FR";
 move 1.336 0.531 1.755 ;
+select -tgl Body ;
+parent;
 select -d;
+
 select -r pCylinder2 ;
+rename "pCylinder2" "BL";
 move -1.51 0.383 -2.016;
+select -tgl Body ;
+parent;
 select -d;
+
 select -r pCylinder3 ;
+rename "pCylinder3" "FL";
 move -1.513 0.458 1.715 ;
+select -tgl Body ;
+parent;
 select -d;
+
 select -r pCylinder4 ;
+rename "pCylinder4" "BR";
 move 1.381 0.541 -1.73;
+select -tgl Body ;
+parent;
