@@ -1,0 +1,7 @@
+//Random list
+string $names[] = {"Callum", "Cel", "Zak"};
+
+float $random = floor(rand(2 + .5));
+$thing = int($random);
+
+print $names[$thing];
